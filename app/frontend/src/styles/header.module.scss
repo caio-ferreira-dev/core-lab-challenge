@@ -1,0 +1,37 @@
+@import './variables.module.scss';
+
+.title {
+    color: $logo-title;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 30px;
+}
+
+.navContainer {
+    display: flex;
+    width: 100vw;
+    height: 50px;
+    background-color: $primary;
+    align-items: center;
+    padding-left: 35px;
+}
+
+.searchContainer {
+    width: 500px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 0 10px;
+    input {
+        width: 100%;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.closeButton {
+    margin-left: auto;
+    margin-right: 25px;
+}
