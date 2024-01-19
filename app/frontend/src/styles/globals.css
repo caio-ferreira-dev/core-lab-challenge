@@ -7,6 +7,14 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-input:focus {
+body {
+    background-color: #f0f2f5;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+input:focus, textarea:focus {
     outline: none;
 }

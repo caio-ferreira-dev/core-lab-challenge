@@ -1,18 +1,23 @@
 @import './variables.module.scss';
 
+
 .container {
     width: 500px;
-    height: 100px;
-    max-height: 420px;
+    height: auto;
     margin: 20px 0 40px 0px;
     border-radius: 3px;
     border: 1px solid #D9D9D9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     background-color: $primary;
-    input {
+    textarea {
+        resize: none;
+        height: auto;
+        width: 100%;
+        max-height: 500px;
         padding: 0 20px;
-        margin-top: 15px;
+        margin: 15px 0;
     }
+    position: absolute;
 }
 
 .titleContainer {
@@ -22,7 +27,9 @@
     height: 40px;
     border-bottom: 1px solid #D9D9D9;;
     input {
+        width: 80%;
         margin: 0;
+        padding: 0 20px;
         color: $note-title;
         font-weight: bold;
     }
@@ -33,3 +40,39 @@
         }
     }
 }
+
+
+
+  .buttonDiv {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 10px;
+    padding: 0 10px;
+    
+
+    span {
+        font-size: 14px;
+        font-weight: bold;
+        width: 200px;
+        margin-right: 250px;
+        color: rgb(255, 118, 118);
+    }
+
+    button {
+        background-color: $primary;
+        width: 10px;
+        height: 10px;
+        margin: 0;
+        padding: 0;
+        border: solid $subtitle;
+        border-width: 0 2px 2px 0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+  }
