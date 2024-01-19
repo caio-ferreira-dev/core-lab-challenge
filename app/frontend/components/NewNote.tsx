@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styles from '../src/styles/newNote.module.scss'
 import Image from 'next/image'
-import { Note } from '../types/note'
+import { NoteData } from '../types/note'
 import axios from 'axios'
 
 const defaultState = {
@@ -14,7 +14,7 @@ const defaultState = {
     }
 
 export default function NewNote() {
-    const [note, setNote] = useState<Note>(defaultState)
+    const [note, setNote] = useState<NoteData>(defaultState)
     const [formError, setFormError] = useState('')
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -51,7 +51,7 @@ export default function NewNote() {
 
     }
     return (
-        <div className={styles.container}>
+        <div className={styles.newNoteContainer}>
             <div className={styles.titleContainer}>
                 <input type="text" placeholder='Título' value={note.name} onChange={handleTitleChange}/>
                 {note.favorite ? 

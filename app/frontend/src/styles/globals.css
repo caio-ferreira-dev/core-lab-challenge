@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
     border: none;
     font-family: 'Montserrat', sans-serif;
 }
@@ -17,4 +18,13 @@ body {
 
 input:focus, textarea:focus {
     outline: none;
+}
+
+textarea {
+    resize: none;
+    height: auto;
+    width: 100%;
+    max-height: 500px;
+    padding: 0 20px;
+    margin: 15px 0;
 }

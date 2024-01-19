@@ -1,4 +1,4 @@
-export type Note = {
+export type NoteData = {
   id: number;
   created_at: Date;
   name: string;

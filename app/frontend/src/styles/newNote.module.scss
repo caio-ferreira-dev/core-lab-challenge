@@ -1,13 +1,14 @@
 @import './variables.module.scss';
 
 
-.container {
+.newNoteContainer {
     width: 500px;
     height: auto;
     margin: 20px 0 40px 0px;
     border-radius: 3px;
     border: 1px solid #D9D9D9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25),
+                -1px -1px 1px rgba(0, 0, 0, 0.15);
     background-color: $primary;
     textarea {
         resize: none;
@@ -28,8 +29,7 @@
     border-bottom: 1px solid #D9D9D9;;
     input {
         width: 80%;
-        margin: 0;
-        padding: 0 20px;
+        margin: 0 20px;
         color: $note-title;
         font-weight: bold;
     }
@@ -51,7 +51,6 @@
     margin: 10px;
     padding: 0 10px;
     
-
     span {
         font-size: 14px;
         font-weight: bold;
@@ -64,8 +63,6 @@
         background-color: $primary;
         width: 10px;
         height: 10px;
-        margin: 0;
-        padding: 0;
         border: solid $subtitle;
         border-width: 0 2px 2px 0;
         transform: rotate(-45deg);

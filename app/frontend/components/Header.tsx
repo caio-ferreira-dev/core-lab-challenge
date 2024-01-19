@@ -1,19 +1,18 @@
 import Image from 'next/image'
 import styles from '../src/styles/header.module.scss' 
 import { useEffect, useState } from 'react'
+import { useNotes } from '../context/NotesContext';
 import axios from 'axios'
 
-type HeaderProps = {
-    setNotes: Function;
-}
 
-export default function Header({setNotes}: HeaderProps) {
+export default function Header() {
+    const { notes, dispatch } = useNotes();
     const [searchInput, setSearchInput] = useState('')
 
     useEffect(() => {
         async function searchNotes(){
             const { data } = await axios.get(`http://localhost:5001/notes/${searchInput}`)
-            setNotes(data)
+            dispatch({type: 'updateArray', payload: data})
         }
         if (searchInput.length > 0) {
             searchNotes()
