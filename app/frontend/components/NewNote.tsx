@@ -3,6 +3,7 @@ import styles from '../src/styles/newNote.module.scss'
 import Image from 'next/image'
 import { NoteData } from '../types/note'
 import axios from 'axios'
+import { useNotes } from '../context/NotesContext'
 
 const defaultState = {
     id: 0,
@@ -17,6 +18,7 @@ export default function NewNote() {
     const [note, setNote] = useState<NoteData>(defaultState)
     const [formError, setFormError] = useState('')
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
+    const { dispatch } = useNotes();
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -25,13 +27,16 @@ export default function NewNote() {
         } 
     }, [note.content])
 
-    const handleTitleChange = (e: ChangeEvent<HTMLInputElement> ) => {
+    function handleTitleChange(e: ChangeEvent<HTMLInputElement> ) {
         setNote({...note, name: e.target.value})
     } 
-    const handleFavoriteChange = () => {
+    function handleFavoriteChange() {
         setNote({...note, favorite: !note.favorite})
     }
-    const handleNoteSave = async () => {
+    function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+        setNote({...note, content: e.target.value })
+    }
+    async function handleNoteSave() {
         if(note.name.length < 1) {
             setFormError('Adicione um Título à nota.')
             return
@@ -41,14 +46,14 @@ export default function NewNote() {
             return
         }
         setFormError('')
-        const { id, created_at, ...data } = note
-        const response = await axios.post('http://localhost:5001/notes', data)
-        if(response.data.statusCode === 409) {
+        const { id, created_at, ...requestData } = note
+        const { data } = await axios.post('http://localhost:5001/notes', requestData)
+        if(data.statusCode === 409) {
             setFormError('Já existe uma nota com este nome.')
             return
         }
+        dispatch({type: 'addNote', payload: data.note})
         setNote(defaultState)
-
     }
     return (
         <div className={styles.newNoteContainer}>
@@ -59,7 +64,7 @@ export default function NewNote() {
                     <Image alt='Favorite icon' src={'/images/not_favorite_icon.png'} width={16} height={16} onClick={handleFavoriteChange}></Image>
                 }
             </div>
-            <textarea placeholder='Criar nota...' value={note.content} ref={textAreaRef} onChange={(e) => {setNote({...note, content: e.target.value })}}/>
+            <textarea placeholder='Criar nota...' value={note.content} ref={textAreaRef} onChange={handleContentChange}/>
             <div className={styles.buttonDiv}>
                 {formError ? 
                     <span>{formError}</span> : 

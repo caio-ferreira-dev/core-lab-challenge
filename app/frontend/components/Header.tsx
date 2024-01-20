@@ -22,7 +22,7 @@ export default function Header() {
     }, [searchInput])
 
     return (
-        <div className={styles.navContainer}>
+        <header className={styles.navContainer}>
             <Image alt='Notes icon' src={'/images/notes_icon.png'} width={32} height={32}></Image>
             <h2 className={styles.title}>CoreNotes</h2>
             <div className={styles.searchContainer}>
@@ -30,6 +30,6 @@ export default function Header() {
                 <Image alt='Magnifying glass icon' src={'/images/magnifying_glass.png'} width={16} height={16}></Image>
             </div>
             <Image className={styles.closeButton} alt='Close button button' src={'/images/x_button.png'} width={16} height={16}></Image>
-        </div>
+        </header>
     )
 }

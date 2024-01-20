@@ -12,17 +12,19 @@ import { coreResponse } from './types/core.res';
 import { NotesService } from './notes.service';
 import { Note } from './types/note';
 import { UpdateDTO } from './DTO/update.dto';
+import { noteResponse } from './types/note.res';
 
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Post()
-  async createNote(@Body() reqData: CreateDTO): Promise<coreResponse> {
+  async createNote(@Body() reqData: CreateDTO): Promise<noteResponse> {
     const dbResponse = await this.notesService.save(reqData);
     return {
       statusCode: 200,
-      message: `Note '${dbResponse}' saved`,
+      note: dbResponse,
+      message: `Note '${dbResponse.name}' saved`,
     };
   }
 
@@ -45,11 +47,12 @@ export class NotesController {
   }
 
   @Patch()
-  async updateNote(@Body() reqData: UpdateDTO): Promise<coreResponse> {
+  async updateNote(@Body() reqData: UpdateDTO): Promise<noteResponse> {
     const dbResponse = await this.notesService.update(reqData);
     return {
       statusCode: 200,
-      message: `Note '${dbResponse}' updated`,
+      note: dbResponse,
+      message: `Note '${dbResponse.name}' updated`,
     };
   }
 

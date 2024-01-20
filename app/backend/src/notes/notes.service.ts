@@ -8,7 +8,7 @@ import { UpdateDTO } from './DTO/update.dto';
 export class NotesService {
   constructor(private readonly dbService: DatabaseService) {}
 
-  async save(reqData: CreateDTO): Promise<string> {
+  async save(reqData: CreateDTO): Promise<Note> {
     const dbData = await this.dbService.notes.findFirst({
       where: {
         name: reqData.name,
@@ -21,7 +21,7 @@ export class NotesService {
 
     const dbResponse = await this.dbService.notes.create({ data: reqData });
 
-    return dbResponse.name;
+    return dbResponse;
   }
 
   async getAll(): Promise<Note[]> {
@@ -49,7 +49,7 @@ export class NotesService {
     return dbResponse;
   }
 
-  async update(reqData: UpdateDTO): Promise<string> {
+  async update(reqData: UpdateDTO): Promise<Note> {
     const data = { ...reqData };
     delete data.id;
     const dbResponse = await this.dbService.notes.update({
@@ -58,7 +58,7 @@ export class NotesService {
       },
       data,
     });
-    return dbResponse.name;
+    return dbResponse;
   }
 
   async delete(id: number): Promise<string> {

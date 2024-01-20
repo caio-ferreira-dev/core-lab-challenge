@@ -8,12 +8,14 @@
 }
 
 .navContainer {
+    position: fixed;
     display: flex;
     width: 100vw;
     height: 50px;
     background-color: $primary;
     align-items: center;
     padding-left: 35px;
+    z-index: 1;
 }
 
 .searchContainer {
