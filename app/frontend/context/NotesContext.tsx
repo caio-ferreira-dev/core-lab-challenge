@@ -1,13 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
-
-type NoteData = {
-  id: number;
-  created_at: Date;
-  name: string;
-  content: string;
-  favorite: boolean;
-  color: string;
-};
+import { NoteData } from '../types/note';
 
 type NotesAction =
   | { type: 'addNote'; payload: NoteData }

@@ -72,7 +72,7 @@ export default function Note({noteData}: NoteProps) {
                 </div>  
                 <div className={`${styles.buttonContainer} ${styles.colorOption} ${choosingColor ? styles.selectingColor : ''}`}>
                     <button className={`${styles.optionButton} ${styles.colorButton}`} onClick={handleColor}></button>
-                    {choosingColor ? <ColorBar setColor={setColor}/> : ''}
+                    {choosingColor ? <ColorBar setState={setChoosingColor} setColor={setColor}/> : ''}
                 </div>
                 <div className={`${styles.buttonContainer} ${styles.deleteOption}`} onClick={handleDelete}>
                     <button className={styles.optionButton}></button>

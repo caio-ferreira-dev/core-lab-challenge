@@ -8,6 +8,22 @@
     background-color: $secondary;
 }
 
+@media only screen and (max-width: 767px) {
+    .favorite {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h2 {
+            margin: 0 auto;
+        }
+    }
+    
+    .notesList {
+        flex-direction: column;
+    }
+}
+
+
 .contentContainer {
     display: flex;
     flex-direction: column;
@@ -22,16 +38,13 @@
 .notesList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
 }
 
 .favorite {
     margin-top: 240px;
-    width: 100%;
 }
 
     
 .other {
     margin-top: 50px;
-    width: 100%;
 }

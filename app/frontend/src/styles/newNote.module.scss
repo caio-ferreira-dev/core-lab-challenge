@@ -21,6 +21,13 @@
     position: absolute;
 }
 
+@media only screen and (max-width: 767px) {
+    .newNoteContainer {
+        width: 400px;
+        max-width: 90vw;
+    }
+}
+
 .titleContainer {
     display: flex;
     align-items: center;

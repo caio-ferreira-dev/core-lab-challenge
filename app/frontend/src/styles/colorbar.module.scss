@@ -2,7 +2,7 @@
 
 .colorBarContainer {
     position: absolute;
-    top: -40px;
+    top: 40px;
     left: 0;
     background-color: $primary;
     width: 350px;
@@ -21,6 +21,19 @@
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .colorBarContainer {
+        padding: 5px;
+        width: 250px;
+        height: 80px;
+        gap: 10px;
+        button {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+        }
+    }
+}
 .lightBlue {
     background-color: $lightBlue;
 }

@@ -1,16 +1,29 @@
+import { useEffect, useRef } from "react"
 import styles from "../src/styles/colorbar.module.scss"
 
 type ColorBarProps = {
     setColor: Function
+    setState: Function
 }
 
-export default function ColorBar({ setColor }: ColorBarProps) {
+export default function ColorBar({ setColor, setState }: ColorBarProps) {
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        function handleOutsideClick(e: React.MouseEvent | MouseEvent) {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+              setState(false);
+            }
+        };
+        document.addEventListener('mousedown', handleOutsideClick);
+    }, [])
+
     function handleClick(color: string) {
         setColor(color)
     }
 
     return (
-        <div className={styles.colorBarContainer}>
+        <div className={styles.colorBarContainer} ref={containerRef}>
             <button className={styles.lightBlue} onClick={() => {handleClick('lightBlue')}}></button>
             <button className={styles.green} onClick={() => {handleClick('green')}}></button>
             <button className={styles.yellow} onClick={() => {handleClick('yellow')}}></button>

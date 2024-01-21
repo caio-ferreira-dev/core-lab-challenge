@@ -18,6 +18,12 @@
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .noteContainer {
+        max-width: 90vw;
+    }
+}
+
 .optionsContainer {
     display: flex;
     height: 40px;
