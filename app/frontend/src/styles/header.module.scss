@@ -16,6 +16,10 @@
     align-items: center;
     padding-left: 35px;
     z-index: 1;
+    
+    p {
+        margin-left: auto;
+    }
 }
 
 .searchContainer {
@@ -33,6 +37,14 @@
     }
 }
 
+.closeButton {
+    margin-left: 25px;
+    margin-right: 25px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .searchContainer {
         max-width: 40vw;
@@ -43,9 +55,12 @@
     .title {
         font-size: 12px;
     }
-}
-
-.closeButton {
-    margin-left: auto;
-    margin-right: 25px;
+    .navContainer {
+        p {
+            display: none;
+        }
+    }
+    .closeButton {
+        margin-left: auto;
+    }
 }

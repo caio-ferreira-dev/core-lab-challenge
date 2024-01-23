@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { NoteData } from '../types/note'
 import axios from 'axios'
 import { useNotes } from '../context/NotesContext'
+import { useUser } from '../context/User.contex'
 
 const defaultState = {
     id: 0,
@@ -19,6 +20,7 @@ export default function NewNote() {
     const [formError, setFormError] = useState('')
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const { dispatch } = useNotes();
+    const { user } = useUser();
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -46,8 +48,13 @@ export default function NewNote() {
             return
         }
         setFormError('')
+            
         const { id, created_at, ...requestData } = note
-        const { data } = await axios.post('http://localhost:5001/notes', requestData)
+        const { data } = await axios.post(`http://localhost:5001/notes/`, requestData, {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        })
         if(data.statusCode === 409) {
             setFormError('Já existe uma nota com este nome.')
             return

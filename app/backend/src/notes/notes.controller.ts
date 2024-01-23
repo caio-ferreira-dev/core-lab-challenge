@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateDTO } from './DTO/create.dto';
 import { coreResponse } from './types/core.res';
@@ -13,14 +15,22 @@ import { NotesService } from './notes.service';
 import { Note } from './types/note';
 import { UpdateDTO } from './DTO/update.dto';
 import { noteResponse } from './types/note.res';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
-  async createNote(@Body() reqData: CreateDTO): Promise<noteResponse> {
-    const dbResponse = await this.notesService.save(reqData);
+  async createNote(
+    @Body() reqData: CreateDTO,
+    @Req() request,
+  ): Promise<noteResponse> {
+    const userId = request.tokenPayload.id;
+    const dbResponse = await this.notesService.save(reqData, userId);
     return {
       statusCode: 200,
       note: dbResponse,
@@ -28,24 +38,17 @@ export class NotesController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get()
-  async getAllNotes(): Promise<Note[]> {
-    const dbResponse = await this.notesService.getAll();
+  async getAllNotes(@Req() request): Promise<Note[]> {
+    const userId = request.tokenPayload.id;
+    const dbResponse = await this.notesService.getAll(+userId);
     return dbResponse;
   }
 
-  @Get('/favorite')
-  async getFavoritesNotes(): Promise<Note[]> {
-    const dbResponse = await this.notesService.getFavorites();
-    return dbResponse;
-  }
-
-  @Get(':query')
-  async searchNotes(@Param('query') queryInput: string): Promise<Note[]> {
-    const dbResponse = await this.notesService.search(queryInput);
-    return dbResponse;
-  }
-
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Patch()
   async updateNote(@Body() reqData: UpdateDTO): Promise<noteResponse> {
     const dbResponse = await this.notesService.update(reqData);
@@ -56,6 +59,8 @@ export class NotesController {
     };
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteNote(@Param('id') id: number): Promise<coreResponse> {
     const dbResponse = await this.notesService.delete(+id);

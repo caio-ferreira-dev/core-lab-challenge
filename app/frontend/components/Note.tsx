@@ -5,6 +5,7 @@ import { useNotes } from "../context/NotesContext";
 import { NoteData } from "../types/note";
 import axios from "axios";
 import ColorBar from "./ColorBar";
+import { useUser } from "../context/User.contex";
 
 type NoteProps = {
     noteData: NoteData;
@@ -15,6 +16,7 @@ export default function Note({noteData}: NoteProps) {
     const { dispatch } = useNotes();
     const [isEditing, setIsEditing] = useState(false)
     const [choosingColor, setChoosingColor] = useState(false)
+    const { user } = useUser()
 
     useEffect(() => {
         if(!isEditing) {
@@ -22,10 +24,13 @@ export default function Note({noteData}: NoteProps) {
         }
         async function makeRequest() {
             const { created_at, ...requestData } = note
-            const { data } = await axios.patch('http://localhost:5001/notes', requestData)
+            const { data } = await axios.patch('http://localhost:5001/notes', requestData, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                }
+            })
             dispatch({type: 'updateArray', payload: data.note})
         }
-
     }, [isEditing])
 
     function handleTitleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -44,7 +49,11 @@ export default function Note({noteData}: NoteProps) {
         isEditing ? setIsEditing(false) : setIsEditing(true);
     }
     async function handleDelete() {
-        await axios.delete(`http://localhost:5001/notes/${note.id}`)
+        await axios.delete(`http://localhost:5001/notes/${note.id}`, {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        })
         dispatch({ type: 'deleteNote', payload: note.id });
     }
     function handleColor() {
@@ -52,7 +61,11 @@ export default function Note({noteData}: NoteProps) {
     }
     async function setColor(color: string) {
         setNote({...note, color})
-        const { data } = await axios.patch('http://localhost:5001/notes', {id: note.id,color})
+        const { data } = await axios.patch('http://localhost:5001/notes', {id: note.id,color}, {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        })
         dispatch({type: 'updateArray', payload: data.note})
     }
 

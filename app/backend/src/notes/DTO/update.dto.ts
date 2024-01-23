@@ -10,6 +10,13 @@ export class UpdateDTO {
   id: number;
 
   @ApiProperty({
+    description: 'User id',
+    example: 1,
+  })
+  @IsString()
+  user_id: number;
+
+  @ApiProperty({
     description: 'Note name',
     example: 'Code a cool app',
   })

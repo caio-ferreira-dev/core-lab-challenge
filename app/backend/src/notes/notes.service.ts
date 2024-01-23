@@ -8,10 +8,11 @@ import { UpdateDTO } from './DTO/update.dto';
 export class NotesService {
   constructor(private readonly dbService: DatabaseService) {}
 
-  async save(reqData: CreateDTO): Promise<Note> {
+  async save(reqData: CreateDTO, user_id: number): Promise<Note> {
     const dbData = await this.dbService.notes.findFirst({
       where: {
         name: reqData.name,
+        user_id,
       },
     });
 
@@ -19,32 +20,16 @@ export class NotesService {
       throw new ConflictException('Note name already in use');
     }
 
-    const dbResponse = await this.dbService.notes.create({ data: reqData });
-
-    return dbResponse;
-  }
-
-  async getAll(): Promise<Note[]> {
-    const dbResponse = await this.dbService.notes.findMany();
-    return dbResponse;
-  }
-
-  async getFavorites(): Promise<Note[]> {
-    const dbResponse = await this.dbService.notes.findMany({
-      where: {
-        favorite: true,
-      },
+    const dbResponse = await this.dbService.notes.create({
+      data: { ...reqData, user_id },
     });
+
     return dbResponse;
   }
 
-  async search(query: string): Promise<Note[]> {
+  async getAll(user_id: number): Promise<Note[]> {
     const dbResponse = await this.dbService.notes.findMany({
-      where: {
-        name: {
-          contains: query,
-        },
-      },
+      where: { user_id },
     });
     return dbResponse;
   }

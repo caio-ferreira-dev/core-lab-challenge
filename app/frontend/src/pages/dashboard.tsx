@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import { NoteData } from "../types/note";
-import styles from "../src/styles/dashboard.module.scss"
-import NewNote from "./NewNote";
-import Note from "./Note";
-import { useNotes } from '../context/NotesContext';
+import Header from "../../components/Header";
+import { NoteData } from "../../types/note";
+import styles from "../styles/dashboard.module.scss"
+import NewNote from "../../components/NewNote";
+import Note from "../../components/Note";
+import { useNotes } from '../../context/NotesContext';
 import axios from "axios";
+import { useUser } from "../../context/User.contex";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Dashboard() {
+    const router = useRouter()
     const { notes, dispatch } = useNotes();
     const [query, setQuery] = useState('')
+    const { user } = useUser()
 
     useEffect(() => {
+        if(user.token === null) {
+            router.push('/login')
+        }
         async function getNotes() {
-            const { data } = await axios.get<NoteData[]>('http://localhost:5001/notes')
+            const { data } = await axios.get<NoteData[]>(`http://localhost:5001/notes/`, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            })
             dispatch({type: 'createArray', payload: data})
         }
         getNotes()
@@ -61,13 +73,18 @@ export default function Dashboard() {
     }
 
     return (
-        <div className={styles.mainContainer}>
-            <Header query={query} setQuery={setQuery}/>
-            <div className={styles.contentContainer}>
-                <NewNote/>
-                {renderList('Favoritas')}
-                {renderList('Outras')}
+        <>
+            <Head>
+                <title>CoreNotes</title>
+            </Head>
+            <div className={styles.mainContainer}>
+                <Header query={query} setQuery={setQuery}/>
+                <div className={styles.contentContainer}>
+                    <NewNote/>
+                    {renderList('Favoritas')}
+                    {renderList('Outras')}
+                </div>
             </div>
-        </div>
+        </>
     )
 }

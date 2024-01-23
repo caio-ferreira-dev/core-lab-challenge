@@ -21,6 +21,7 @@ Clone/Fork the repo and make sure you are in the folder "app" in your terminal b
 2. Create a ```.env``` file, add a variable 
 ```
 DATABASE_URL="mysql://{dbUser}:{dbPassword}@{host}:{port}/corelab_todo"
+JWT_SECRET="{secretKey}"
 ``` 
 make sure to modify what's inside "{}" with the respective values before the next step
 
@@ -36,4 +37,4 @@ npm run build
 npm run start
 ``` 
 
-5. Type localhost:5000 in your browser and enjoy the app 🚀
+5. Type [localhost:3000](http://localhost:3000) in your browser and enjoy the app 🚀
