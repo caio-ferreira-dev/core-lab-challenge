@@ -36,6 +36,9 @@
 @media only screen and (max-width: 767px) {
     .searchContainer {
         max-width: 40vw;
+        input {
+            font-size: 12px;
+        }
     }
     .title {
         font-size: 12px;

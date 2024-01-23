@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import { NoteData } from "../../types/note";
-import styles from "../styles/dashboard.module.scss"
-import NewNote from "../../components/NewNote";
-import Note from "../../components/Note";
-import { useNotes } from '../../context/NotesContext';
+import Header from "./Header";
+import { NoteData } from "../types/note";
+import styles from "../src/styles/dashboard.module.scss"
+import NewNote from "./NewNote";
+import Note from "./Note";
+import { useNotes } from '../context/NotesContext';
 import axios from "axios";
 
 export default function Dashboard() {
@@ -71,7 +71,3 @@ export default function Dashboard() {
         </div>
     )
 }
-// {notes ? renderFavorites : null}
-
-// <FavoriteNotes/>
-// <OtherNotes/>

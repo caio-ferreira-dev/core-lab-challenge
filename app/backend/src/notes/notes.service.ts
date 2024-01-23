@@ -62,8 +62,6 @@ export class NotesService {
   }
 
   async delete(id: number): Promise<string> {
-    console.log(id);
-
     const dbResponse = await this.dbService.notes.delete({
       where: {
         id,

@@ -1,9 +1,15 @@
+import Head from "next/head";
+import Dashboard from "../../components/dashboard";
 
-export default function Landing() {
+export default function Home() {
   return (
-    <main
-      className={``}
-    >
-    </main>
+    <>
+      <Head>
+        <title>CoreNotes</title>
+      </Head>
+      <main>
+        <Dashboard/>
+      </main>
+    </>
   )
 }
