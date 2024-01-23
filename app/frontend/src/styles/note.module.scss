@@ -1,0 +1,96 @@
+@import './variables.module.scss';
+@import './newNote.module.scss';
+@import './colorbar.module.scss';
+
+.noteContainer{
+    margin: 20px;
+    width: 400px;
+    height: 450px;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25),
+                -1px -1px 1px rgba(0, 0, 0, 0.15);
+    textarea {
+       height: 325px;
+       background-color: transparent;
+    }
+    input {
+        background-color: transparent;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .noteContainer {
+        max-width: 90vw;
+    }
+}
+
+.optionsContainer {
+    display: flex;
+    height: 40px;
+    margin-top: auto;
+    align-items: center;
+}
+
+.optionButton {
+    width: 20px;
+    height: 20px; 
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.editOption {
+    button {
+        background-color: transparent;
+        background-image: url('../../public/images/pen_icon.png');
+        background-size: cover;
+    }
+    margin-left: 20px;
+}
+
+.editing {
+    button {
+        background-color: transparent;
+        width: 7px;
+        height: 14px;
+        border: solid $subtitle;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    background-color: $selected;
+    margin-left: 20px;
+}
+
+.colorOption {
+    position: relative;
+    margin-left: 10px;
+}
+
+.selectingColor {
+    background-color: $selected;
+}
+
+.colorButton {
+    background-color: transparent;
+    background-image: url('../../public/images/color_fill_icon.png');
+    background-size: cover;
+}
+
+.deleteOption {
+    button {
+        background-color: transparent;
+        background-image: url('../../public/images/x_button.png');
+        background-size: cover;
+        width: 16px;
+        height: 16px;
+    }
+    margin-left: auto;
+    margin-right: 20px;
+}

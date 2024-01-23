@@ -1,0 +1,72 @@
+@import './variables.module.scss';
+
+.colorBarContainer {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: $primary;
+    width: 350px;
+    height: 30px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+
+    button {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .colorBarContainer {
+        padding: 5px;
+        width: 250px;
+        height: 80px;
+        gap: 10px;
+        button {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+        }
+    }
+}
+.lightBlue {
+    background-color: $lightBlue;
+}
+.green {
+    background-color: $green;
+}
+.yellow {
+    background-color: $yellow;
+}
+.pink {
+    background-color: $pink;
+}
+.red {
+    background-color: $red;
+}
+.blue {
+    background-color: $blue;
+}
+.purple {
+    background-color: $purple;
+}
+.lime {
+    background-color: $lime;
+}
+.orange {
+    background-color: $orange;
+}
+.gray {
+    background-color: $gray;
+}
+.black {
+    background-color: $black;
+}
+.brown {
+    background-color: $brown;
+}

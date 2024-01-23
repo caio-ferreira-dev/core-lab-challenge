@@ -1,0 +1,87 @@
+@import './variables.module.scss';
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 32px;
+
+    p {
+        font-weight: 600;
+        margin-left: auto;
+        margin-right: auto;
+        transition: all;
+        transition-duration: 0.3s;
+    }
+}
+
+.pageButton {
+    background-color: $selected;
+    transition: all;
+    transition-duration: 0.5s;
+    color: $primary;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-top: 24px;
+    width: 112px;
+    align-self: end;
+    font-weight: 600;
+    &:hover {
+        background-color: $corelab;
+    }
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    span {
+        background-color: $primary;
+        width: 10px;
+        height: 10px;
+        border: solid $subtitle;
+        border-width: 0 2px 2px 0;
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        transition: all;
+        transition-duration: 0.5s;
+    }
+
+    &:hover {
+        span {
+            cursor: pointer;
+            border: solid $corelab;
+            border-width: 0 2px 2px 0;
+        }
+    }
+
+}
+
+.loginInput {
+    background-color: $primary;
+    padding: 8px;
+}
+
+.passwordInput {
+    background-color: $primary;
+    padding: 8px;
+}
+
+.error {
+    color: $error;
+}
+
+.default {
+    color: $secondary;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .formContainer {
+        button {
+            align-self: center;
+        }
+    }
+}

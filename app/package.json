@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "turbo": "^1.10.16"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "dev": "turbo run dev"
+  },
+  "workspaces": [
+    "/backend",
+    "/frontend"
+  ]
+}
